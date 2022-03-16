@@ -1,0 +1,10 @@
+数据来源：https://heat.qq.com/qianxi.php
+columns说明：arr_city：到达城市
+dep_city：出发城市
+number：迁徙人口
+time：时间
+其他：从时间上切出来的统计值
+
+tips: .csv文件是处理过的数据， .xlsx是原始数据
+in 和out是迁徙方向
+

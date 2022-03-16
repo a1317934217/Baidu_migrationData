@@ -1,0 +1,210 @@
+<html>
+
+<head>
+    <title></title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>
+    <script type="text/javascript" src="./geo/geo.js"></script>
+    <script type="text/javascript" src="./edge/car2.js"></script>
+    <script type="text/javascript" src="./node/car2.js"></script>
+    <script type="text/javascript" src="./car.js"></script>
+
+
+<body>
+    <div id="container" style="height: 100%"></div>
+    <script type="text/javascript">
+        var dom = document.getElementById("container");
+        var myChart = echarts.init(dom);
+        var app = {};
+        option = null;
+
+        var values = []
+        carData.forEach((item) => {
+            values.push(item['number'])
+        })
+        const maxmin = getMaxMin()
+
+        function getMaxMin() {
+            values.sort((a, b) => { return b - a })
+            const max = values[values.length - 1]
+            const min = values[0]
+            return min - max
+        }
+
+        function getColorByBaiFenBi(bili) {
+            var one = (255 + 255) / 100;
+            var r = 0;
+            var g = 0;
+            var b = 0;
+
+            if (bili < 50) {
+                r = one * bili;
+                g = 255;
+            }
+            if (bili >= 50) {
+                g = 255 - ((bili - 50) * one);
+                r = 255;
+            }
+            r = parseInt(r);
+            g = parseInt(g);
+            b = parseInt(b);
+
+            return "rgb(" + r + "," + g + "," + b + ")";
+
+        }
+
+
+        var convertData = function(data) {
+            var res = [];
+            for (var i = 0; i < data.length; i++) {
+                var dataItem = data[i];
+                var fromCoord = geoCoordMap[dataItem[0].name];
+                var toCoord = geoCoordMap[dataItem[1].name];
+                if (fromCoord && toCoord) {
+                    res.push({
+                        fromName: dataItem[0].name,
+                        toName: dataItem[1].name,
+                        coords: [fromCoord, toCoord],
+                        value: dataItem[1].value
+                    });
+                }
+            }
+            return res;
+        };
+
+        var series = [];
+        [
+            [edgeData]
+        ].forEach(function(item, i) {
+            //console.log(item,i);
+            series.push(
+                //   {
+                //     name: item[0].name,
+                //     polyline: true,
+                //     type: 'lines',
+                //     zlevel: 1,
+                //     lineStyle: {
+                //         normal: {
+                //             color: 'black',
+                //             width: 0,
+                //             curveness: 0.2
+                //         }
+                //     },
+                //     data: convertData(item[0])
+                // },
+                {
+                    // name: item[0].name,
+                    type: 'lines',
+                    polyline: true,
+                    zlevel: 2,
+                    // symbol: ['none', 'none'],
+                    symbolSize: 10,
+                    lineStyle: {
+                        color: (params) => {
+                            const { data } = params
+                            const { fromName, toName } = data
+                            const res = carData.filter((item) => {
+                                return (fromName === item['dep_city'] && toName === item['arr_city'])
+                            })
+                            const num = res[0] ? parseInt(res[0]['number']) : 1
+                            const bili = Math.round(num / maxmin * 100, 2)
+                            color = getColorByBaiFenBi(bili)
+                            return color
+                        },
+                        width: 2,
+                        opacity: 0.5,
+                        curveness: 0.2
+                    },
+                    data: convertData(item[0])
+                })
+        });
+
+
+        [
+            [Data11]
+        ].forEach(function(item, i) {
+            //console.log(item,i);
+            series.push({
+                type: 'scatter',
+                coordinateSystem: 'geo',
+                data: item[0].map(function(dataItem) {
+                    return {
+                        label: { fontSize: 15 },
+                        name: dataItem[0].name,
+                        value: geoCoordMap[dataItem[0].name].concat([dataItem[0].value])
+                    };
+                }),
+                symbolSize: function(val) {
+                    return val[2]
+                },
+                zlevel: 2,
+                rippleEffect: {
+                    brushType: 'stroke'
+                },
+                label: {
+                    normal: {
+                        show: false,
+                        position: 'right',
+                        formatter: '{b}'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: 'blue'
+
+                    }
+                },
+
+            });
+        });
+        option = {
+            backgroundColor: '#fff', //背景颜色
+            title: {
+                text: '',
+                subtext: '',
+                left: 'center',
+                textStyle: {
+                    color: 'black'
+                }
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                orient: 'vertical',
+                top: 'bottom',
+                left: 'right',
+                data: [],
+                textStyle: {
+                    color: '#fff'
+                },
+                selectedMode: 'multiple',
+            },
+            geo: {
+                map: 'china',
+                label: {
+                    emphasis: {
+                        show: true,
+                        color: 'black'
+                    }
+                },
+                roam: true,
+                itemStyle: {
+                    normal: {
+                        areaColor: '#eeeeee', //省份的着色
+                        borderColor: '#cecece' //边界颜色
+                    },
+                    emphasis: {
+                        areaColor: '#cecece' //点击某个省份的颜色
+                    }
+                }
+            },
+            series: series
+        };
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+    </script>
+</body>
+
+</html>
