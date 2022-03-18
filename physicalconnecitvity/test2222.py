@@ -22,6 +22,7 @@ from networkx.algorithms import approximation as approx
 from networkx.algorithms.connectivity import minimum_st_node_cut
 import  pandas as pd
 G = nx.Graph()
+G1 = nx.Graph()
 G.add_node("A",desc="A")
 G.add_node("B",desc="B")
 G.add_node("C",desc="C")
@@ -31,16 +32,42 @@ G.add_node("E",desc="E")
 # G.add_node("G",desc="G")
 G.add_edges_from([("A","B") ,("A" ,"D") ,("C" ,"B") ,("C" ,"D"),("B" ,"D")])
 
+
+G1.add_node("A",desc="A")
+G1.add_node("B",desc="B")
+G1.add_node("C",desc="C")
+G1.add_node("D",desc="D")
+G1.add_node("E",desc="E")
+# G.add_node("F",desc="F")
+# G.add_node("G",desc="G") ,("B" ,"D")
+G1.add_edges_from([("A","B") ,("A" ,"D") ,("C" ,"B") ,("C" ,"D")])
+
 pos = nx.circular_layout(G)
 nx.draw(G,pos)
 mode_labels = nx.get_node_attributes(G,'desc')
 nx.draw_networkx_nodes(G,pos,label=mode_labels)
 plt.show()
-number_one = nx.number_connected_components(G)
-S = [G.subgraph(c).copy() for c in nx.connected_components(G)]
 
-short_length = nx.global_efficiency(G)
-print("最短路径：", short_length)
+pos = nx.circular_layout(G1)
+nx.draw(G1,pos)
+mode_labels = nx.get_node_attributes(G1,'desc')
+nx.draw_networkx_nodes(G1,pos,label=mode_labels)
+plt.show()
+
+dela_first_list = list(set(G)^set(G1))
+print(dela_first_list)
+print(len(dela_first_list))
+
+
+
+
+
+
+# number_one = nx.number_connected_components(G)
+# S = [G.subgraph(c).copy() for c in nx.connected_components(G)]
+#
+# short_length = nx.global_efficiency(G)
+# print("最短路径：", short_length)
 # print("连通分量：", len(S))
 # print("连通分量_one：", number_one)
 # for subgraphValue in S:

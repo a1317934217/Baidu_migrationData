@@ -88,8 +88,7 @@ print(len(deepCopy_G))
 #最后排序的结果
 print(bubbleSort(deepCopy_G))
 #输出为csv
-
-
+bubbleSort(deepCopy_G).to_csv('D:\\04python project\\01-爬虫-爬取百度迁徙数据\physicalconnecitvity\indicators\data.csv', index=False, encoding="utf-8-sig")
 
 # Gra = nx.Graph()
 # Gra.add_edges_from(S[10].edges())
