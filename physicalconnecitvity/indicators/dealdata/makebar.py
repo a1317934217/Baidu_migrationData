@@ -7,10 +7,37 @@
 # -*- coding: utf-8 -*-
 # import matplotlib.pyplot as plt
 import csv
+from matplotlib import pyplot as plt
 from collections import Counter
 import os
 import pandas as pd
 #
+filepath_front ="D:\\04python project\\01-爬虫-爬取百度迁徙数据\\physicalconnecitvity\\indicators\\data\\"
+filelist =['0101-0104data.csv', '0104-0106data.csv', '0106-0111data.csv', '0106-0116data.csv', '0111-0116data.csv', '0116-0121data.csv', '0204-0207data.csv', '0207-0209data.csv', '0209-0212data.csv', '0212-0213data.csv', '0221-0222data.csv', '0222-0224data.csv', '0224-0227data.csv', '0227-0307data.csv', '0307-0315data.csv', '0315-0316data.csv']
+with open(filepath_front + "Counterdata.csv", 'r', encoding='utf-8')as f:
+    read = csv.reader(f)
+    for index, info in enumerate(read):
+        print(info[0])
+        print(info[1])
+        list_cityname=[]
+        list_cityvalue=[]
+        # for i in info[1]:
+        #     list_cityname.append(i[0])
+        #     list_cityvalue.append(i[1])
+        # print("list_cityname",list_cityname)
+        # print("list_cityvalue",list_cityvalue)
+        # plt.bar(list_cityname, list_cityvalue,  fc='r')
+        # plt.legend()
+        # plt.show()
+
+# aaaa = ["0101-0104data.csv",[('济南', 4), ('烟台', 2), ('石家庄', 6), ('唐山', 4)]]
+# print(aaaa[1])
+# for i in aaaa[1]:
+#     print(i[0])
+#     print(i[1])
+
+
+
 # name_list = ['Monday', 'Tuesday', 'Friday', 'Sunday']
 # num_list = [1.5, 0.6, 7.8, 6]
 # num_list1 = [1, 2, 3, 1]
@@ -28,22 +55,17 @@ import pandas as pd
 # print(os.listdir("D:\\04python project\\01-爬虫-爬取百度迁徙数据\\physicalconnecitvity\\indicators\\data"))
 
 
-filepath_front ="D:\\04python project\\01-爬虫-爬取百度迁徙数据\\physicalconnecitvity\\indicators\\data\\"
-filelist =['0101-0104data.csv', '0104-0106data.csv', '0106-0111data.csv', '0106-0116data.csv', '0111-0116data.csv', '0116-0121data.csv', '0204-0207data.csv', '0207-0209data.csv', '0209-0212data.csv', '0212-0213data.csv', '0221-0222data.csv', '0222-0224data.csv', '0224-0227data.csv', '0227-0307data.csv', '0307-0315data.csv', '0315-0316data.csv']
+# 输出前十四个城市的增加或减少的 连边
+# for file_name in filelist:
+#     list_value =[]
+#     with open(filepath_front + file_name, 'r', encoding='utf-8')as f:
+#         read = csv.reader(f)
+#         for index, info in enumerate(read):
+#             if index != 0:  # 这里加判断
+#                 # print(info[:2])
+#                 list_value.append(info[0])
+#                 list_value.append(info[1])
+#         counter_value = Counter(list_value)
+#         print(counter_value)
+#         print(file_name,list(dict(counter_value).items())[:14])
 
-for file_name in filelist:
-    list_value =[]
-    with open(filepath_front + file_name, 'r', encoding='utf-8')as f:
-        read = csv.reader(f)
-        for index, info in enumerate(read):
-            if index != 0:  # 这里加判断
-                # print(info[:2])
-                list_value.append(info[0])
-                list_value.append(info[1])
-        counter_value = Counter(list_value)
-        print(file_name,list(dict(counter_value).items())[:14])
-a  = Counter({'上海': 15, '北京': 15, '武汉': 10, '深圳': 8, '重庆': 7, '昆明': 7, '合肥': 7, '天津': 7, '石家庄': 6, '长沙': 6, '杭州': 6, '菏泽': 6, '成都': 6, '西安': 6, '长春': 5, '广州': 5, '兰州': 5, '张家口': 5, '哈尔滨': 5, '济南': 4, '唐山': 4, '青岛': 4, '铜陵': 4, '保定': 4, '阜阳': 4, '锡林郭勒盟': 4, '怀化': 4, '南充': 4, '郑州': 4, '扬州': 4, '湘西土家族苗族自治州': 3, '保山': 3, '南京': 3, '上饶': 3, '平凉': 3, '连云港': 3, '郴州': 3, '太原': 3, '南昌': 3, '苏州': 3, '滨州': 3, '六安': 3, '开封': 3, '临沧': 3, '宣城': 3, '天水': 3, '宜春': 3, '信阳': 3, '淮北': 3, '亳州': 3, '邯郸': 3, '大理白族自治州': 3, '聊城': 3, '自贡': 3, '曲靖': 3, '百色': 3, '渭南': 3, '承德': 3, '肇庆': 3, '烟台': 2, '沈阳': 2, '呼和浩特': 2, '宁波': 2, '廊坊': 2, '张家界': 2, '延边朝鲜族自治州': 2, '金华': 2, '黑河': 2, '池州': 2, '厦门': 2, '永州': 2, '南宁': 2, '福州': 2, '大连': 2, '潍坊': 2, '陇南': 2, '桂林': 2, '临沂': 2, '淮南': 2, '新乡': 2, '清远': 2, '辽源': 2, '镇江': 2, '三明': 2, '萍乡': 2, '芜湖': 2, '韶关': 2, '台州': 2, '运城': 2, '徐州': 2, '赤峰': 2, '沧州': 2, '东莞': 2, '白山': 2, '荆州': 2, '无锡': 2, '茂名': 2, '阳江': 2, '日照': 2, '乌兰察布': 2, '濮阳': 2, '黔西南布依族苗族自治州': 2, '通辽': 2, '驻马店': 2, '庆阳': 2, '通化': 2, '阜新': 2, '齐齐哈尔': 2, '临汾': 2, '揭阳': 2, '蚌埠': 2, '洛阳': 2, '长治': 2, '常州': 2, '南通': 2, '龙岩': 2, '玉林': 2, '吉林': 2, '济源': 2, '十堰': 1, '恩施土家族苗族自治州': 1, '威海': 1, '温州': 1, '大同': 1, '东营': 1, '天门': 1, '朔州': 1, '景德镇': 1, '莆田': 1, '漳州': 1, '丹东': 1, '济宁': 1, '西双版纳傣族自治州': 1, '贺州': 1, '淄博': 1, '佳木斯': 1, '鹤岗': 1, '伊春': 1, '攀枝花': 1, '潜江': 1, '西宁': 1, '邢台': 1, '许昌': 1, '三门峡': 1, '梧州': 1, '鹤壁': 1, '黄冈': 1, '鄂州': 1, '晋城': 1, '新余': 1, '珠海': 1, '宿州': 1, '商丘': 1, '绵阳': 1, '铜仁': 1, '衡水': 1, '邵阳': 1, '秦皇岛': 1, '南平': 1, '岳阳': 1, '安庆': 1, '鸡西': 1, '赣州': 1, '广元': 1, '佛山': 1, '鹰潭': 1, '泸州': 1, '昭通': 1, '吉安': 1, '巴彦淖尔': 1, '乌海': 1, '株洲': 1, '河池': 1, '衢州': 1, '兴安盟': 1, '文山壮族苗族自治州': 1, '定西': 1, '江门': 1, '孝感': 1, '随州': 1, '锦州': 1, '周口': 1, '吕梁': 1, '梅州': 1, '六盘水': 1, '汕尾': 1, '遂宁': 1, '南阳': 1, '盐城': 1, '巴中': 1, '毕节': 1, '铜川': 1, '葫芦岛': 1, '朝阳': 1, '黔东南苗族侗族自治州': 1, '阳泉': 1, '贵阳': 1, '益阳': 1, '娄底': 1, '鄂尔多斯': 1, '忻州': 1, '延安': 1, '泉州': 1, '常德': 1, '平顶山': 1, '绍兴': 1, '达州': 1, '广安': 1, '楚雄彝族自治州': 1, '武威': 1, '金昌': 1, '钦州': 1, '宜昌': 1, '泰州': 1, '来宾': 1, '贵港': 1, '嘉兴': 1, '宿迁': 1, '凉山彝族自治州': 1, '乐山': 1, '绥化': 1, '泰安': 1, '北海': 1})
-
-
-
-#list(dict(list_value).items())[:14]
