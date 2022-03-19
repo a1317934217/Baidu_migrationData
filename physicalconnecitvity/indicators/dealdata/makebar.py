@@ -17,7 +17,7 @@ import pandas as pd
 #
 # filepath_front ="D:\\04python project\\01-爬虫-爬取百度迁徙数据\\physicalconnecitvity\\indicators\\data\\"
 filepath_front ="/Users/wuhao/PycharmProjects/Baidu_migrationData/physicalconnecitvity/indicators/data/"
-filelist =['0101-0104data.csv', '0104-0106data.csv', '0106-0111data.csv', '0106-0116data.csv', '0111-0116data.csv', '0116-0121data.csv', '0204-0207data.csv', '0207-0209data.csv', '0209-0212data.csv', '0212-0213data.csv', '0221-0222data.csv', '0222-0224data.csv', '0224-0227data.csv', '0227-0307data.csv', '0307-0315data.csv', '0315-0316data.csv']
+filelist =['0101-0104data.csv', '0104-0106data.csv', '0106-0111data.csv', '0111-0116data.csv', '0116-0121data.csv', '0204-0207data.csv', '0207-0209data.csv', '0209-0212data.csv', '0212-0213data.csv', '0221-0222data.csv', '0222-0224data.csv', '0224-0227data.csv', '0227-0307data.csv', '0307-0315data.csv', '0315-0316data.csv']
 # with open(filepath_front + "Counterdata.csv", 'r', encoding='utf-8')as f:
 #     read = csv.reader(f)
 #     for index, info in enumerate(read):
@@ -56,20 +56,19 @@ list_name_Y = [data0101_0104data,data0104_0106data,data0106_0111data,data0111_01
                data0207_0209data,data0209_0212data,data0212_0213data,data0221_0222data,data0222_0224data,data0224_0227data,
                data0227_0307data,data0307_0315data,data0315_0316data]
 
-for i  in list_name_Y:
-    list_cityname = []
-    list_cityvalue=[]
-    for j in i:
-        list_cityname.append(j[0])
-        list_cityvalue.append(j[1])
-    plt.bar(list_cityname, list_cityvalue,  tick_label = list_cityname, fc='r') #label='边数量'
-    plt.xticks(list_cityname, rotation=45, fontproperties=font)
-    plt.ylabel("数值", fontproperties=font)
-    # plt.title(fontproperties=font)
-
-
-    plt.legend()
-    plt.show()
+# for i  in list_name_Y:
+#     list_cityname = []
+#     list_cityvalue=[]
+#     for j in i:
+#         list_cityname.append(j[0])
+#         list_cityvalue.append(j[1])
+#     plt.bar(list_cityname, list_cityvalue,  tick_label = list_cityname, fc='r') #label='边数量'
+#     plt.xticks(list_cityname, rotation=45, fontproperties=font)
+#     plt.ylabel("数值", fontproperties=font)
+#     # plt.title(fontproperties=font)
+#
+#     plt.legend()
+#     plt.show()
 
 
 # from matplotlib.font_manager import FontManager
@@ -89,16 +88,16 @@ for i  in list_name_Y:
 
 
 # 输出前十四个城市的增加或减少的 连边
-# for file_name in filelist:
-#     list_value =[]
-#     with open(filepath_front + file_name, 'r', encoding='utf-8')as f:
-#         read = csv.reader(f)
-#         for index, info in enumerate(read):
-#             if index != 0:  # 这里加判断
-#                 # print(info[:2])
-#                 list_value.append(info[0])
-#                 list_value.append(info[1])
-#         counter_value = Counter(list_value)
-#         print(counter_value)
-#         print(file_name,list(dict(counter_value).items())[:14])
+for file_name in filelist:
+    list_value =[]
+    with open(filepath_front + file_name, 'r', encoding='utf-8')as f:
+        read = csv.reader(f)
+        for index, info in enumerate(read):
+            if index != 0:  # 这里加判断
+                # print(info[:2])
+                list_value.append(info[0])
+                list_value.append(info[1])
+        counter_value = Counter(list_value)
+        print(counter_value)
+        # print(file_name,list(dict(counter_value).items())[:14])
 
