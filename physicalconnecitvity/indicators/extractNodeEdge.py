@@ -9,9 +9,9 @@ import networkx as nx
 from matplotlib import pyplot as plt
 
 fileNamePath_one = "F:\\01大连民族\\百度迁徙爬取和数据\\百度迁徙数据-final\\" \
-                   "03将两个In和Out相同行合并_最终数据\\20200116finalData.csv"
+                   "03将两个In和Out相同行合并_最终数据\\20200106finalData.csv"
 fileNamePath_two = "F:\\01大连民族\\百度迁徙爬取和数据\\百度迁徙数据-final\\" \
-                   "03将两个In和Out相同行合并_最终数据\\20200121finalData.csv"
+                   "03将两个In和Out相同行合并_最终数据\\20200116finalData.csv"
 
 #冒泡
 def bubbleSort(arr):
@@ -20,7 +20,7 @@ def bubbleSort(arr):
     for i in range(n):
         # Last i elements are already in place
         for j in range(0, n - i - 1):
-            if arr[j][2]["weight"] > arr[j + 1][2]["weight"]:
+            if arr[j][2]["weight"] < arr[j + 1][2]["weight"]:
                 arr[j], arr[j + 1] = arr[j + 1], arr[j]
     return arr
 #元组比较
@@ -82,13 +82,19 @@ for i in range(len(minG)):
     for j in range(len(maxG)):
         if compare_twoTuple(minG[i],maxG[j]):
             deepCopy_G.remove(maxG[j])
-print(deepCopy_G)
-print(len(deepCopy_G))
 
 #最后排序的结果
-print(bubbleSort(deepCopy_G))
+lastvalue = bubbleSort(deepCopy_G)
+order = ['city_name', 'citye_id_name', 'value', ]
+test = pd.DataFrame(data=lastvalue)  # 数据有三列，列名分别为one,two,three
 #输出为csv
-bubbleSort(deepCopy_G).to_csv('D:\\04python project\\01-爬虫-爬取百度迁徙数据\physicalconnecitvity\indicators\data.csv', index=False, encoding="utf-8-sig")
+test.to_csv('D:\\04python project\\01-爬虫-爬取百度迁徙数据\\'
+'physicalconnecitvity\indicators\\data\\0106-0116data.csv', index=False, encoding="utf-8-sig")
+
+
+
+
+
 
 # Gra = nx.Graph()
 # Gra.add_edges_from(S[10].edges())
