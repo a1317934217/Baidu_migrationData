@@ -9,10 +9,10 @@ import networkx as nx
 from matplotlib import pyplot as plt
 
 fileNamePath_one = "F:\\01大连民族\\百度迁徙爬取和数据\\百度迁徙数据-final\\" \
-                   "03将两个In和Out相同行合并_最终数据\\20200106finalData.csv"
+                   "03将两个In和Out相同行合并_最终数据\\20200315finalData.csv"
 fileNamePath_two = "F:\\01大连民族\\百度迁徙爬取和数据\\百度迁徙数据-final\\" \
-                   "03将两个In和Out相同行合并_最终数据\\20200116finalData.csv"
-
+                   "03将两个In和Out相同行合并_最终数据\\20200316finalData.csv"
+file_name_end_tocsv = "connect_number\\0315_0316data_risiing.csv"
 #冒泡
 def bubbleSort(arr):
     n = len(arr)
@@ -85,11 +85,11 @@ for i in range(len(minG)):
 
 #最后排序的结果
 lastvalue = bubbleSort(deepCopy_G)
-order = ['city_name', 'citye_id_name', 'value', ]
+order = ['city_name', 'city_id_name', 'value', ]
 test = pd.DataFrame(data=lastvalue)  # 数据有三列，列名分别为one,two,three
 #输出为csv
 test.to_csv('D:\\04python project\\01-爬虫-爬取百度迁徙数据\\'
-'physicalconnecitvity\indicators\\data\\0106-0116data.csv', index=False, encoding="utf-8-sig")
+'physicalconnecitvity\indicators\\data\\'+file_name_end_tocsv, index=False,header=order, encoding="utf-8-sig")
 
 
 
@@ -108,14 +108,14 @@ test.to_csv('D:\\04python project\\01-爬虫-爬取百度迁徙数据\\'
 
 
 
-# print("平均聚类稀系数Gdemo_one：", nx.average_clustering(Gdemo_one))
-# print("平均聚类稀系数Gdemo_two：", nx.average_clustering(Gdemo_two))
-#
-# print("点数量Gdemo_one：", nx.number_of_nodes(Gdemo_one))
-# print("点数量Gdemo_two：", nx.number_of_nodes(Gdemo_two))
-#
-# print("边数量Gdemo_one：", nx.number_of_edges(Gdemo_one))
-# print("边数量Gdemo_two：", nx.number_of_edges(Gdemo_two))
+print("平均聚类稀系数Gdemo_one：", nx.average_clustering(Gdemo_one))
+print("平均聚类稀系数Gdemo_two：", nx.average_clustering(Gdemo_two))
+
+print("点数量Gdemo_one：", nx.number_of_nodes(Gdemo_one))
+print("点数量Gdemo_two：", nx.number_of_nodes(Gdemo_two))
+
+print("边数量Gdemo_one：", nx.number_of_edges(Gdemo_one))
+print("边数量Gdemo_two：", nx.number_of_edges(Gdemo_two))
 
 # print("图密度Gdemo_one：", nx.density(Gdemo_one))
 # print("图密度Gdemo_two：", nx.density(Gdemo_two))
