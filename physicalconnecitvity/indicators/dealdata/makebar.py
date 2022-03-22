@@ -7,6 +7,8 @@
 # -*- coding: utf-8 -*-
 # import matplotlib.pyplot as plt
 import csv
+
+import networkx as nx
 from matplotlib.font_manager import FontProperties
 
 import matplotlib
@@ -15,8 +17,8 @@ from collections import Counter
 import os
 import pandas as pd
 #
-# filepath_front ="D:\\04python project\\01-爬虫-爬取百度迁徙数据\\physicalconnecitvity\\indicators\\data\\"
-filepath_front ="/Users/wuhao/PycharmProjects/Baidu_migrationData/physicalconnecitvity/indicators/data/"
+filepath_front ="D:\\04python project\\01-爬虫-爬取百度迁徙数据\\physicalconnecitvity\\indicators\\data\\average_node_connectiy\\"
+# filepath_front ="/Users/wuhao/PycharmProjects/Baidu_migrationData/physicalconnecitvity/indicators/data/"
 filelist =['0101-0104data.csv', '0104-0106data.csv', '0106-0111data.csv', '0111-0116data.csv', '0116-0121data.csv', '0204-0207data.csv', '0207-0209data.csv', '0209-0212data.csv', '0212-0213data.csv', '0221-0222data.csv', '0222-0224data.csv', '0224-0227data.csv', '0227-0307data.csv', '0307-0315data.csv', '0315-0316data.csv']
 # with open(filepath_front + "Counterdata.csv", 'r', encoding='utf-8')as f:
 #     read = csv.reader(f)
@@ -77,14 +79,90 @@ list_name_Y = [data0101_0104data,data0104_0106data,data0106_0111data,data0111_01
 # print(mat_fonts)
 
 
+remove_edge_list_diffedge =["0101_0102data_falling.csv","0104_0105data_falling.csv","0109_0110data_risiing.csv","0115_0116data_risiing.csv","0118_0119data_falling.csv","0121_0122data_risiing.csv","0122_0123data_falling.csv","0102_0103data_risiing.csv","0110_0111data_falling.csv"]
+remove_edge_list_origionnet = ["20200101finalData.csv","20200104finalData.csv","20200109finalData.csv" ,"20200115finalData.csv","20200118finalData.csv","20200121finalData.csv","20200122finalData.csv","20200102finalData.csv","20200110finalData.csv"]
+
+add_edge_list_diffedge = []
+add_edge_list_origionnet =[]
+
+list_a = [4,5,6,1]
+list_b = [1,2,3]
+# 列表b中包含而列表A中没有的元素
+# differ_list_b = list(set(list_b).difference(set(list_a)))
+# print(differ_list_b)
+# # 列表a中包含而列表b中没有的元素
+# differ_list_a = list(set(list_a).difference(set(list_b)))
+# print(differ_list_a)
+
+# dataMiga_add = pd.read_csv(filepath_front + '0102-0103data_removeEdges.csv')
+# print(dataMiga_add)
+# if len(dataMiga_add)==0:
+#     print("adawdasdawdas")
+# else:
+#     print("meiyou")
+# print(len(dataMiga_add)==0)
+# aaaa = 1.4849956587801172
+# a=('%.5f' % aaaa)
+# print(a)
 
 
 
 
 
 
+# print(os.listdir("D:\\04python project\\01-爬虫-爬取百度迁徙数据\\physicalconnecitvity\\indicators\\data\\diversity\\"))
 
-print(os.listdir("D:\\04python project\\01-爬虫-爬取百度迁徙数据\\physicalconnecitvity\\indicators\\data\\average_node_connectiy\\"))
+fileNamePath = "F:\\01大连民族\\百度迁徙爬取和数据\\百度迁徙数据-final\\03将两个In和Out相同行合并_最终数据\\"
+
+# 根据路径画图
+def drawpicture(filePath):
+    """
+    输入文件路径最后绘制成图G
+    """
+    G = nx.DiGraph()
+    try:
+        dataMiga = pd.read_csv(filePath)
+    except Exception as problem:
+        print("error根据路径画图出现问题：", problem)
+    # 得到每一行的数据
+    for row in dataMiga.itertuples():
+        city_name = getattr(row, "city_name")
+        city_id_name = getattr(row, "city_id_name")
+        G.add_edges_from([(city_name, city_id_name)])
+    return G
+def drawpicture_underect(filePath):
+    """
+    输入文件路径最后绘制成图G
+    """
+    G = nx.Graph()
+    try:
+        dataMiga = pd.read_csv(filePath)
+    except Exception as problem:
+        print("error根据路径画图出现问题：", problem)
+    # 得到每一行的数据
+    for row in dataMiga.itertuples():
+        city_name = getattr(row, "city_name")
+        city_id_name = getattr(row, "city_id_name")
+        G.add_edges_from([(city_name, city_id_name)])
+    return G
+
+listXData = ['20200101', '20200102', '20200103', '20200104', '20200105', '20200106', '20200107', '20200108', '20200109', '20200110', '20200111', '20200112', '20200113', '20200114', '20200115', '20200116', '20200117', '20200118', '20200119', '20200120', '20200121', '20200122', '20200123', '20200124', '20200125', '20200126', '20200127', '20200128', '20200129', '20200130', '20200131', '20200201', '20200202', '20200203', '20200204', '20200205', '20200206', '20200207', '20200208', '20200209', '20200210', '20200211', '20200212', '20200213', '20200214', '20200215', '20200216', '20200217', '20200218', '20200219', '20200220', '20200221', '20200222', '20200223', '20200224', '20200225', '20200226', '20200227', '20200228', '20200229', '20200301', '20200302', '20200303', '20200304', '20200305', '20200306', '20200307', '20200308', '20200309', '20200310', '20200311', '20200312', '20200313', '20200314', '20200315', '20200316', '20200317', '20200318', '20200319', '20200320', '20200321', '20200322', '20200323', '20200324', '20200325', '20200326', '20200327', '20200328', '20200329', '20200330', '20200331', '20200401', '20200402', '20200403', '20200404', '20200405', '20200406', '20200407', '20200408', '20200409', '20200410', '20200411', '20200412', '20200413', '20200414', '20200415', '20200416', '20200417', '20200418', '20200419', '20200420', '20200421', '20200422', '20200423', '20200424', '20200425', '20200426', '20200427', '20200428', '20200429', '20200430', '20200501', '20200502', '20200503']
+list_number_connect=[]
+list_weaker_number=[]
+# for i in listXData:
+#     G = drawpicture(fileNamePath +i+"finalData.csv")
+#     G_under = drawpicture_underect(fileNamePath +i+"finalData.csv")
+#     list_weaker_number.append(nx.number_weakly_connected_components(G))
+#     #最大连通子图
+#     ccc = max(nx.connected_components(G_under), key=len)
+#     list_number_connect.append(len(ccc))
+# #511
+# print(list_number_connect)
+# print(list_weaker_number)
+number_weakly_connected_component_list= [1, 2, 11, 19, 26, 36, 48, 65, 78, 92, 104, 111, 122, 133, 139, 152, 161, 170, 182, 187, 193, 198, 206, 217, 225, 230, 231, 236, 239, 245, 251, 255, 260, 264, 271, 273, 274, 277, 281, 283, 286, 286, 288, 289, 290, 293, 300, 303, 303, 307, 309]
+print(len(number_weakly_connected_component_list))
+
+# print(nx.weakly_connected_components(G))
 
 file_path_average_node = ['0101_0102data_falling.csv', '0102_0103data_risiing.csv', '0103_0104data_risiing.csv', '0104_0105data_falling.csv', '0107_0108data_risiing.csv', '0110_0111data_risiing.csv', '0111_0112data_falling.csv', '0120_0121data_risiing.csv', '0121_0122data_falling.csv']
 # 输出前十四个城市的增加或减少的 连边
