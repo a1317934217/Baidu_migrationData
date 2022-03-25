@@ -24,7 +24,6 @@ def drawpicture(filePath):
     """
     global dataMiga
     G = nx.Graph()
-
     try:
         dataMiga = pd.read_csv(filePath)
     except Exception as problem:

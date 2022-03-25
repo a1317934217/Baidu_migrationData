@@ -107,10 +107,18 @@ list_b = [1,2,3]
 
 
 
+average_node_result_Edges_fileFront = "D:\\04python project\\01-爬虫-爬取百度迁徙数据\\" \
+                                      "physicalconnecitvity\\indicators\\data\\connect_number" \
+                                      "\\result\\"
+result_filename  = ['0101-0102data_addEdges.cs_finall_indicators.csv', '0101-0102data_removeEdges_finall_indicators.csv', '0102-0103data_addEdges.cs_finall_indicators.csv', '0103-0104data_addEdges.cs_finall_indicators.csv', '0103-0104data_removeEdges_finall_indicators.csv', '0104-0105data_addEdges.cs_finall_indicators.csv', '0104-0105data_removeEdges_finall_indicators.csv', '0107-0108data_addEdges.cs_finall_indicators.csv', '0107-0108data_removeEdges_finall_indicators.csv', '0110-0111data_addEdges.cs_finall_indicators.csv', '0110-0111data_removeEdges_finall_indicators.csv', '0111-0112data_addEdges.cs_finall_indicators.csv', '0111-0112data_removeEdges_finall_indicators.csv', '0120-0121data_addEdges.cs_finall_indicators.csv', '0120-0121data_removeEdges_finall_indicators.csv', '0121-0122data_addEdges.cs_finall_indicators.csv', '0121-0122data_removeEdges_finall_indicators.csv']
+adawdawdas = '0101-0102data_removeEdges_finall_indicators.csv'
+print(adawdawdas[0:9])
+print(adawdawdas[14:15])
+print(adawdawdas[0:4])
+
+print(os.listdir(average_node_result_Edges_fileFront))
 
 
-
-# print(os.listdir("D:\\04python project\\01-爬虫-爬取百度迁徙数据\\physicalconnecitvity\\indicators\\data\\diversity\\"))
 
 fileNamePath = "F:\\01大连民族\\百度迁徙爬取和数据\\百度迁徙数据-final\\03将两个In和Out相同行合并_最终数据\\"
 
@@ -160,7 +168,7 @@ list_weaker_number=[]
 # print(list_number_connect)
 # print(list_weaker_number)
 number_weakly_connected_component_list= [1, 2, 11, 19, 26, 36, 48, 65, 78, 92, 104, 111, 122, 133, 139, 152, 161, 170, 182, 187, 193, 198, 206, 217, 225, 230, 231, 236, 239, 245, 251, 255, 260, 264, 271, 273, 274, 277, 281, 283, 286, 286, 288, 289, 290, 293, 300, 303, 303, 307, 309]
-print(len(number_weakly_connected_component_list))
+# print(len(number_weakly_connected_component_list))
 
 # print(nx.weakly_connected_components(G))
 
@@ -191,3 +199,26 @@ result = [('南京-芜湖', 1.4869492077273714), ('六盘水-安顺', 1.48692207
 #             '123.csv',)index=False, encoding="utf-8-sig"
 # ccccc  = "0101_0102data_falling.csv"
 # print(ccccc[:21])
+
+
+
+#'武汉': 7, '上海': 7, '合肥': 7, '北京': 7, '西安
+# list_aaaa = ['信阳-武汉', '西安-武汉', '西安-天水', '武汉-三门峡', '周口-阜阳']
+# for edge_name_want in list_aaaa:
+#     print(edge_name_want.find("武汉"))
+
+
+
+
+
+
+
+
+
+# url = "http://www.6mm.cc/uploads/allimg/1306/2-13060F12S3.jpg"
+# url ='信阳-武汉'
+# print(url.rfind('-', 1))
+# print(url[0:url.rfind('-', 1)])
+# print(url[url.rfind('-', 1)+1:])
+
+
