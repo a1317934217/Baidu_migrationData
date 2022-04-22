@@ -73,8 +73,10 @@ def userCity_removeEdges_Tocaculate_connect_number(city_name,add_edges,G_contras
 fileNamePath_one = "F:\\01大连民族\\百度迁徙爬取和数据\\百度迁徙数据-final\\03将两个In和Out相同行合并_最终数据\\"
 average_node_result_Edges_fileFront = "D:\\04python project\\01-爬虫-爬取百度迁徙数据\\physicalconnecitvity\\indicators\\data\\connect_number\\result\\"
 result_filename  = ['0205-0206data_addEdges.cs_finall_indicators.csv', '0205-0206data_removeEdges_finall_indicators.csv', '0207-0208data_addEdges.cs_finall_indicators.csv', '0207-0208data_removeEdges_finall_indicators.csv', '0208-0209data_addEdges.cs_finall_indicators.csv', '0208-0209data_removeEdges_finall_indicators.csv', '0209-0210data_addEdges.cs_finall_indicators.csv', '0209-0210data_removeEdges_finall_indicators.csv', '0210-0211data_addEdges.cs_finall_indicators.csv', '0210-0211data_removeEdges_finall_indicators.csv', '0212-0213data_addEdges.cs_finall_indicators.csv', '0212-0213data_removeEdges_finall_indicators.csv', '0221-0222data_addEdges.cs_finall_indicators.csv', '0221-0222data_removeEdges_finall_indicators.csv', '0223-0224data_addEdges.cs_finall_indicators.csv', '0223-0224data_removeEdges_finall_indicators.csv', '0306-0307data_addEdges.cs_finall_indicators.csv', '0306-0307data_removeEdges_finall_indicators.csv', '0315-0316data_addEdges.cs_finall_indicators.csv', '0315-0316data_removeEdges_finall_indicators.csv']
-def tocsv_mutipul_edges(result_filename):
-    field_order_move_in = ["city_name", "indicator_value", "edgenum"]
+result_filename_test  = ['0205-0206data_addEdges.cs_finall_indicators.csv', '0205-0206data_removeEdges_finall_indicators.csv']
+
+def tocsv_mutipul_edges(result_filename_test):
+    field_order_move_in = ["city_name", "indicator_value", "edgenum","degree"]
     for result_filename_one in result_filename:
         G_contrast = drawpicture(fileNamePath_one + "2020"+result_filename_one[0:4]+"finalData.csv")
         if result_filename_one[14:15] == "a":
@@ -90,7 +92,7 @@ def tocsv_mutipul_edges(result_filename):
                     final_value = useCity_addEdges_Tocaculate_connect_number(city_name_need_run[0],edges_add_list,G_contrast)
                     # dict_cite_value[city_name_need_run] = final_value
                     # sorted(dict_cite_value.items(), key=lambda x: x[1], reverse=True)
-                    row = {"city_name": city_name_need_run[0], "indicator_value": final_value, "edgenum": city_name_need_run[1]}
+                    row = {"city_name": city_name_need_run[0], "indicator_value": final_value, "edgenum": city_name_need_run[1],"degree":G_contrast.degree(city_name_need_run)}
                     writer.writerow(row)
             df = pd.read_csv(average_node_result_Edges_fileFront +"multiple_cityedge_connectNumber\\" + result_filename_one[0:9]+"addEdgesValue.csv" )
             df.sort_values(by="indicator_value",ascending=False)
@@ -107,7 +109,7 @@ def tocsv_mutipul_edges(result_filename):
                     final_value = userCity_removeEdges_Tocaculate_connect_number(city_name_need_run[0],remove_add_list,G_contrast)
                     # dict_cite_value[city_name_need_run] = final_value
                     # sorted(dict_cite_value.items(), key=lambda x: x[1], reverse=True)
-                    row = {"city_name": city_name_need_run[0], "indicator_value": final_value, "edgenum": city_name_need_run[1]}
+                    row = {"city_name": city_name_need_run[0], "indicator_value": final_value, "edgenum": city_name_need_run[1],"degree":G_contrast.degree(city_name_need_run)}
                     writer.writerow(row)
             df = pd.read_csv(average_node_result_Edges_fileFront + "multiple_cityedge_connectNumber\\" + result_filename_one[0:9] + "removeEdgesValue.csv")
             df.sort_values(by="indicator_value", ascending=False)

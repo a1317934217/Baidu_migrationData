@@ -18,20 +18,20 @@ def whetherConnectivity(graph):
             if connectiveOrNone == "false":
                 return connectiveOrNone
     return connectiveOrNone
-
-G = nx.Graph()
-G.add_node("A",desc="A")
-G.add_node("B",desc="B")
-G.add_node("C",desc="C")
-G.add_node("D",desc="D")
-G.add_node("E",desc="E")
-G.add_edges_from([("A","B") ,("A" ,"D") ,("C" ,"B") ,("C" ,"D") ,("B" ,"D")])
-# G.add_node("E")
-pos = nx.spring_layout(G)
-nx.draw(G,pos)
-mode_labels = nx.get_node_attributes(G,'desc')
-nx.draw_networkx_nodes(G,pos,label=mode_labels)
-plt.show()
+#
+# G = nx.Graph()
+# G.add_node("A",desc="A")
+# G.add_node("B",desc="B")
+# G.add_node("C",desc="C")
+# G.add_node("D",desc="D")
+# G.add_node("E",desc="E")
+# G.add_edges_from([("A","B") ,("A" ,"D") ,("C" ,"B") ,("C" ,"D") ,("B" ,"D")])
+# # G.add_node("E")
+# pos = nx.spring_layout(G)
+# nx.draw(G,pos)
+# mode_labels = nx.get_node_attributes(G,'desc')
+# nx.draw_networkx_nodes(G,pos,label=mode_labels)
+# plt.show()
 
 
 print(whetherConnectivity(G))
@@ -168,3 +168,6 @@ Created on 2017年10月24日
 #                 value += lenMax[i][j]
 #         vaspl.append(value*2.0/(len(subGraphlist)*(len(subGraphlist)-1)))
 #     return vaspl
+
+
+

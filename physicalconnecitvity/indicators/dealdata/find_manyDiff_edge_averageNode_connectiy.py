@@ -69,8 +69,9 @@ def userCity_removeEdges_Tocaculate_average_node_connectity(city_name,add_edges,
 fileNamePath_one = "F:\\01大连民族\\百度迁徙爬取和数据\\百度迁徙数据-final\\03将两个In和Out相同行合并_最终数据\\"
 average_node_result_Edges_fileFront = "D:\\04python project\\01-爬虫-爬取百度迁徙数据\\physicalconnecitvity\\indicators\\data\\average_node_connectiy\\result\\"
 result_filename  = ['0101-0102data_addEdges.cs_finall_indicators.csv', '0101-0102data_removeEdges_finall_indicators.csv', '0102-0103data_addEdges.cs_finall_indicators.csv', '0103-0104data_addEdges.cs_finall_indicators.csv', '0103-0104data_removeEdges_finall_indicators.csv', '0104-0105data_addEdges.cs_finall_indicators.csv', '0104-0105data_removeEdges_finall_indicators.csv', '0107-0108data_addEdges.cs_finall_indicators.csv', '0107-0108data_removeEdges_finall_indicators.csv', '0110-0111data_addEdges.cs_finall_indicators.csv', '0110-0111data_removeEdges_finall_indicators.csv', '0111-0112data_addEdges.cs_finall_indicators.csv', '0111-0112data_removeEdges_finall_indicators.csv', '0120-0121data_addEdges.cs_finall_indicators.csv', '0120-0121data_removeEdges_finall_indicators.csv', '0121-0122data_addEdges.cs_finall_indicators.csv', '0121-0122data_removeEdges_finall_indicators.csv']
+result_filename_test  = ['0101-0102data_addEdges.cs_finall_indicators.csv','0101-0102data_removeEdges_finall_indicators.csv']
 def tocsv_mutipul_edges(result_filename):
-    field_order_move_in = ["city_name", "indicator_value", "edgenum"]
+    field_order_move_in = ["city_name", "indicator_value", "edgenum","degree"]
     for result_filename_one in result_filename:
         G_contrast = drawpicture(fileNamePath_one + "2020"+result_filename_one[0:4]+"finalData.csv")
         if result_filename_one[14:15] == "a":
@@ -86,7 +87,7 @@ def tocsv_mutipul_edges(result_filename):
                     final_value = useCity_addEdges_Tocaculate_average_node_connectity(city_name_need_run[0],edges_add_list,G_contrast)
                     # dict_cite_value[city_name_need_run] = final_value
                     # sorted(dict_cite_value.items(), key=lambda x: x[1], reverse=True)
-                    row = {"city_name": city_name_need_run[0], "indicator_value": final_value, "edgenum": city_name_need_run[1]}
+                    row = {"city_name": city_name_need_run[0], "indicator_value": final_value, "edgenum": city_name_need_run[1],"degree":G_contrast.degree(city_name_need_run)}
                     writer.writerow(row)
             df = pd.read_csv(average_node_result_Edges_fileFront +"multiple_cityedge_averageNode\\" + result_filename_one[0:9]+"addEdgesValue.csv" )
             df.sort_values(by="indicator_value",ascending=False)

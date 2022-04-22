@@ -146,29 +146,29 @@ drawpicbyXyz("/Users/wuhao/PycharmProjects/BaiduMove/百度迁徙数据/01-爬�
 
 
 
-# print("边数：", len(datarow))
-# degreeValue = G.degree()
-# avergerDegree = 0
-# for degreeEvery in degreeValue:
-#     # print(degreeEvery)
-#     # print(type(degreeEvery))
-#     avergerDegree = avergerDegree + degreeEvery[1]
-# print("平均度为：", avergerDegree/23050)
-# print("点数题目已给出")
-# print("平均聚类稀系数：", nx.average_clustering(G))
+print("边数：", len(datarow))
+degreeValue = G.degree()
+avergerDegree = 0
+for degreeEvery in degreeValue:
+    # print(degreeEvery)
+    # print(type(degreeEvery))
+    avergerDegree = avergerDegree + degreeEvery[1]
+print("平均度为：", avergerDegree/23050)
+print("点数题目已给出")
+print("平均聚类稀系数：", nx.average_clustering(G))
 
-# closeness_centralityValue = nx.closeness_centrality(G)
-# closeness_centralityValueNum = 0
-# for i in closeness_centralityValue.values():
-#     closeness_centralityValueNum += i
-# print("平均贴近中心度：", closeness_centralityValueNum/n)
-#
-#
-# eigenvector_centralityValue = nx.eigenvector_centrality(G)
-# eigenvector_centralityValueNum = 0
-# for i in eigenvector_centralityValue.values():
-#     eigenvector_centralityValueNum += i
-# print("平均特征向量中心性：", eigenvector_centralityValueNum/n)
+closeness_centralityValue = nx.closeness_centrality(G)
+closeness_centralityValueNum = 0
+for i in closeness_centralityValue.values():
+    closeness_centralityValueNum += i
+print("平均贴近中心度：", closeness_centralityValueNum/n)
+
+
+eigenvector_centralityValue = nx.eigenvector_centrality(G)
+eigenvector_centralityValueNum = 0
+for i in eigenvector_centralityValue.values():
+    eigenvector_centralityValueNum += i
+print("平均特征向量中心性：", eigenvector_centralityValueNum/n)
 
 
 

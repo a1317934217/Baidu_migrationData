@@ -107,16 +107,42 @@ list_b = [1,2,3]
 
 
 
-average_node_result_Edges_fileFront = "D:\\04python project\\01-爬虫-爬取百度迁徙数据\\" \
-                                      "physicalconnecitvity\\indicators\\data\\connect_number" \
-                                      "\\result\\"
 result_filename  = ['0101-0102data_addEdges.cs_finall_indicators.csv', '0101-0102data_removeEdges_finall_indicators.csv', '0102-0103data_addEdges.cs_finall_indicators.csv', '0103-0104data_addEdges.cs_finall_indicators.csv', '0103-0104data_removeEdges_finall_indicators.csv', '0104-0105data_addEdges.cs_finall_indicators.csv', '0104-0105data_removeEdges_finall_indicators.csv', '0107-0108data_addEdges.cs_finall_indicators.csv', '0107-0108data_removeEdges_finall_indicators.csv', '0110-0111data_addEdges.cs_finall_indicators.csv', '0110-0111data_removeEdges_finall_indicators.csv', '0111-0112data_addEdges.cs_finall_indicators.csv', '0111-0112data_removeEdges_finall_indicators.csv', '0120-0121data_addEdges.cs_finall_indicators.csv', '0120-0121data_removeEdges_finall_indicators.csv', '0121-0122data_addEdges.cs_finall_indicators.csv', '0121-0122data_removeEdges_finall_indicators.csv']
 adawdawdas = '0101-0102data_removeEdges_finall_indicators.csv'
-print(adawdawdas[0:9])
-print(adawdawdas[14:15])
-print(adawdawdas[0:4])
+# print(adawdawdas[0:9])
+# print(adawdawdas[14:15])
+# print(adawdawdas[0:4])
 
-print(os.listdir(average_node_result_Edges_fileFront))
+
+
+
+
+
+
+
+
+
+
+
+
+
+average_node_result_Edges_fileFront = "D:\\04python project\\01-爬虫-爬取百度迁徙数据\\physicalconnecitvity\\indicators\\data\\diversity"
+# print(os.listdir(average_node_result_Edges_fileFront))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -222,3 +248,45 @@ result = [('南京-芜湖', 1.4869492077273714), ('六盘水-安顺', 1.48692207
 # print(url[url.rfind('-', 1)+1:])
 
 
+import collections
+#寻找城市的连边数量 返回Counter()
+def find_city_Counter(edges_add_list,first_name,second_name):
+    # for row in df.iterrows():
+    list_new_data =[]
+    for row in edges_add_list.iterrows():
+        list_new_data.append(row[1][first_name])
+        list_new_data.append(row[1][second_name])
+    count=collections.Counter(list_new_data)
+    #{'武汉': 7, '上海': 7, '合肥': 7,}
+    return count
+
+first_name_remove = "city_name_remove"
+second_name_remove = "city_id_name_remove"
+first_name_add = "city_name_add"
+second_name_add = "city_id_name_add"
+fileName_end = "0315-0316data_removeEdges.csv"   #addEdges   #removeEdges
+cityname =['萍乡','广州']   #['上海', '北京', '苏州', '武汉']
+filename_path_param = "D:\\04python project\\01-爬虫-爬取百度迁徙数据\physicalconnecitvity\indicators\data\\finall_data\\"+fileName_end
+if fileName_end[14:15] == "r":
+    add_edges_data = pd.read_csv(filename_path_param)
+    print(find_city_Counter(add_edges_data,first_name_remove,second_name_remove))
+
+    for city_name_remove_want in cityname:
+        list_city_name = []
+        for edge_name_want in add_edges_data.iterrows():
+            # print(edge_name_want)
+            if edge_name_want[1][first_name_remove] == city_name_remove_want or edge_name_want[1][second_name_remove] == city_name_remove_want:
+                list_city_name.append(
+                    edge_name_want[1][first_name_remove] + "-" + edge_name_want[1][second_name_remove])
+        print(city_name_remove_want,list_city_name)
+elif fileName_end[14:15] == "a":
+    add_edges_data = pd.read_csv(filename_path_param)
+    print(find_city_Counter(add_edges_data, first_name_add, second_name_add))
+    for city_name_remove_want in cityname:
+        list_city_name = []
+        for edge_name_want in add_edges_data.iterrows():
+            # print(edge_name_want)
+            if edge_name_want[1][first_name_add] == city_name_remove_want or edge_name_want[1][second_name_add] == city_name_remove_want:
+                list_city_name.append(
+                    edge_name_want[1][first_name_add] + "-" + edge_name_want[1][second_name_add])
+        print(city_name_remove_want,list_city_name)

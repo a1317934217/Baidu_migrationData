@@ -15,6 +15,9 @@ import re
 import requests
 
 #json解析
+from tqdm import tqdm
+
+
 def loads_jsonp(_jsonp):
     try:
         return json.loads(re.match(".*?({.*}).*", _jsonp, re.S).group(1))
@@ -56,7 +59,7 @@ def get_city_migration_index(file_save_location,task_type):
     """
     global text
     file = csv.reader(open('ChinaAreaCodes.csv',encoding="utf-8"))
-    for row in file:
+    for row in tqdm(file,desc="迁徙指数进度条和类型："+task_type,total=375):
         if row[0] != 'code':
             code = row[0]
             name = row[1]
@@ -78,7 +81,7 @@ def get_city_migration_index(file_save_location,task_type):
                     for key, values in data.items():
                         row = [key, values]
                         writer.writerow(row)
-                print(code + 'is OK')
+                # print(code + 'is OK')
             except Exception as why:
                 print(why)
                 print(code + ' No Data')
@@ -96,7 +99,7 @@ def get_city_migration_proportion(file_save_location,task_type,beginTime,endTime
     # 获得时间列表
     timeList = getdaylist(beginTime,endTime)
     file = csv.reader(open('ChinaAreaCodes.csv',encoding="utf-8"))
-    for row in file:
+    for row in tqdm(file,desc="迁徙比例进度条和类型"+task_type,total=375):
         if row[0] != 'code':
             code = row[0]
             name = row[1]
@@ -129,10 +132,9 @@ def get_city_migration_proportion(file_save_location,task_type,beginTime,endTime
 # get_city_migration_index(migration_index_out,"move_out")
 
 # 两个迁徙比例 爬取
-get_city_migration_proportion(migration_proportion_in,"move_in",20211029,20220210)
-get_city_migration_proportion(migration_proportion_out,"move_out",20211029,20220210)
+get_city_migration_proportion(migration_proportion_in,"move_in",20220210,20220416)
+get_city_migration_proportion(migration_proportion_out,"move_out",20220210,20220416)
 
-requests.close()
 
 
 

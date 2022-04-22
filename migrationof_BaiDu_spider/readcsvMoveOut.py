@@ -5,6 +5,9 @@ import datetime
 # 数据处理 迁出
 
 # 日期时间递增 格式yyyymmdd
+from tqdm import tqdm
+
+
 def getdaylist(beginDate,endDate):
     beginDate = datetime.datetime.strptime(str(beginDate), "%Y%m%d")
     endDate = datetime.datetime.strptime(str(endDate), "%Y%m%d")
@@ -15,9 +18,10 @@ def getdaylist(beginDate,endDate):
     return dayList
 #得到时间
 ######在这里修改要处理的时间的数据
-dayList = getdaylist(20211029,20220210)
+dayList = getdaylist(20220210,20220416)
 # dayList = ["20210731","20210831","20210930"]
-for i in range(len(dayList)):
+for i in tqdm(range(len(dayList)),desc="move_out处理进度",total=len(dayList)):
+    # print("数据处理时间：",dayList[i])
     # 城市代码
     with open('ChinaAreaCodes.csv','r', encoding= 'utf-8', newline='') as csv_chinaCityCode:
         lines = csv_chinaCityCode.readlines()[1:]
@@ -33,13 +37,13 @@ for i in range(len(dayList)):
                 # 示例：F:\01大连民族\百度迁徙爬取和数据\21年7月1日开始的前夕数据处理\百度迁徙数据爬取\迁徙指数\in\110000_北京_move_in.csv
                 #注意：一个迁徙指数文件需要和多个迁徙比例文件做数据处理
                 try:
-                    baiduMigrationIndex = pd.read_csv("F:\\01大连民族\百度迁徙爬取和数据\\百度迁徙数据更新_经常运行\\迁徙指数\\out\\"""+csv_row[0]+"_"+csv_row[1]+"_move_out.csv")
+                    baiduMigrationIndex = pd.read_csv("F:\\01大连民族\百度迁徙爬取和数据\\百度迁徙数据更新_经常运行\\迁徙指数\\out\\"""+csv_row[0]+"_"+csv_row[1]+"_move_out.csv",encoding="utf-8")
                 except Exception as problem:
                     print("error打开迁徙指数有问题：",problem)
                 # 循环打开文件 百度迁徙比例 迁入
                 # 示例：F:\01大连民族\百度迁徙爬取和数据\21年7月1日开始的前夕数据处理\百度迁徙数据爬取\迁徙比例\in\110000_北京_move_in_20210701.csv
                 try:
-                    baiduMigrationProportion = pd.read_csv("F:\\01大连民族\百度迁徙爬取和数据\\百度迁徙数据更新_经常运行\\迁徙比例\\out\\"""+csv_row[0]+"_"+csv_row[1]+"_move_out_"+dayList[i]+".csv")
+                    baiduMigrationProportion = pd.read_csv("F:\\01大连民族\百度迁徙爬取和数据\\百度迁徙数据更新_经常运行\\迁徙比例\\out\\"""+csv_row[0]+"_"+csv_row[1]+"_move_out_"+dayList[i]+".csv",encoding="gbk")
                 except Exception as problem:
                     print("error打开迁徙比例有问题：", problem)
                 # 定位到某天的一整行

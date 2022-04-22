@@ -81,9 +81,9 @@ def  find_diff_edges_of_AandB(llist1,list2):
 
 
 
-lista_all = ["0101","0102","0104","0109","0110","0115","0118","0121","0122"]
-listb_all = ["0102","0103","0105","0110","0111","0116","0119","0122","0123"]
-filepath_front ="D:\\04python project\\01-爬虫-爬取百度迁徙数据\\physicalconnecitvity\\indicators\\data\\diversity\\"
+lista_all = ["0319"]
+listb_all = ["0320"]
+filepath_front ="D:\\04python project\\01-爬虫-爬取百度迁徙数据\\physicalconnecitvity\\indicators\\data\\finall_data\\"
 for first_data,second_data in zip(lista_all,listb_all):
     fileNamePath_one = "F:\\01大连民族\\百度迁徙爬取和数据\\百度迁徙数据-final\\" \
                        "03将两个In和Out相同行合并_最终数据\\2020"+first_data+"finalData.csv"
@@ -93,7 +93,9 @@ for first_data,second_data in zip(lista_all,listb_all):
     file_name_end_addEdges = first_data+"-"+second_data+"data_addEdges.csv"
 
     Gdemo_one = drawpicture(fileNamePath_one)
+    print(first_data+"的边：",len(Gdemo_one.edges()),len(Gdemo_one.nodes()))
     Gdemo_two = drawpicture(fileNamePath_two)
+    print(second_data + "的边：", len(Gdemo_two.edges()), len(Gdemo_two.nodes()))
     # print(Gdemo_one)
     alledges_one = list(Gdemo_one.edges())
     alledges_two = list(Gdemo_two.edges())
