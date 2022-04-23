@@ -34,10 +34,14 @@ def whetherConnectivity(graph):
 # plt.show()
 
 
-print(whetherConnectivity(G))
-print(len(list(nx.all_node_cuts(G))))
-
-allNodes = array(G.nodes())
+avergerDegree = 0
+print(G.degree("E"))
+# for degreeEvery in G.degree():
+#     # print(degreeEvery)
+#     # print(type(degreeEvery))
+#     avergerDegree = avergerDegree + degreeEvery[1]
+#
+# print("平均度为：", format(avergerDegree/20,".2f"))
 # length = 0
 # for i in range(0, G.number_of_nodes()):
 #     for j in range(0, G.number_of_nodes()):

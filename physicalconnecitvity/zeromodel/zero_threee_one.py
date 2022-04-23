@@ -297,6 +297,7 @@ def random_3k(G0, nswap=1, max_tries=100, connected=1):
 
 
 
+
 #输入原始网络
 fh = open("../network/twitter/twitter_3k.txt",'rb')
 g = nx.read_edgelist(fh)
@@ -305,9 +306,9 @@ g0 =g.to_undirected()
 
 edges = len(g0.edges())
 
-nswap=edges*10
-max_tries=1000000
-g1 =random_2k(g0,nswap,max_tries)
+nswap= edges*10
+max_tries = 1000000
+g1 = random_2k(g0, nswap, max_tries)
 #输出网络
 fh = open("../network/twitter/twitter_2k_2.txt", 'wb')
 nx.write_edgelist(g1,fh,data=False)
@@ -321,6 +322,14 @@ G1 = G1.to_undirected()
 short = nx.average_shortest_path_length(G1)
 
 print(short)
+
+
+
+
+
+
+
+
 
 
 
