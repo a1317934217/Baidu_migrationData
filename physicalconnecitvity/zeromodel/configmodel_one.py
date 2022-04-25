@@ -61,14 +61,43 @@ print("连通分量：", len(S))
 list_degree = list(G.degree())
 list_degree.sort(key=lambda x:x[1],reverse=True)
 print("度分布：",list_degree )
-n =0
-for (u,v) in G.edges():
-    while n <= 5:
-        if u =="北京" or v == "5t6r北京":
-            print(u,v)
-            n += 1
+def find_edges_by_cityName(G_one,edgeNum,cityName):
+    """
+    根据城市名称查找有该城市的边
+    :param G:
+    :param edgeNum:
+    :param cityName:
+    :return:
+    """
+    list_edges=[]
+    n =0
+    for (u,v) in G_one.edges():
+        while n <  edgeNum:
+            if u ==cityName or v == cityName:
+                list_edges.append((u,v))
+                # print(u,v)
+                n += 1
+                break
+            break
+    return list_edges
+
+# G_one.remove_edge()
+
+def remove_edges_by_degree_distribution(G_one,list_degree):
+    n=0
+    #减小度大的连边
+    for i in list_degree:
+        while n < 5:
+            edge_list = find_edges_by_cityName(G_one,round(i[1]*0.1),i[0])
+            G_one.remove_edges_from(edge_list)
+            n+=1
+            break
+    #增加度小的连边
+    # for j in reversed(list_degree):
 
 
+
+# print(find_edges_by_cityName(G,1,"汉中"))
 
 
 
