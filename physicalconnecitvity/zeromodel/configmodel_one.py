@@ -4,6 +4,7 @@
 # @Author  : wuhao
 # @Email   : guess?????
 # @File    : __init__.py.py
+#构造迁徙网络模型，暂时搁置时间为20220429
 import networkx as nx
 
 import datetime
@@ -31,6 +32,8 @@ listXData = ['20200101', '20200102', '20200103', '20200104', '20200105', '202001
 fileNamePath = "F:\\01大连民族\\百度迁徙爬取和数据\\百度迁徙数据-final\\03将两个In和Out相同行合并_最终数据\\"
 
 # fileNamePath = "/Users/wuhao/PycharmProjects/Baidu_migrationData/migration_data/"
+
+
 # 根据路径画图
 def drawpicture(filePath):
     """
@@ -53,14 +56,26 @@ def drawpicture(filePath):
     return G
 
 G  = drawpicture(fileNamePath+"20200104finalData.csv")
-S = [G.subgraph(c).copy() for c in nx.connected_components(G)]
-print("点数量：", len(G.nodes()))
-print("边数量：", len(G.edges()))
-print("连通分量：", len(S))
+
+
+
+def print_igraph_para(G_model,explain):
+    S = [G_model.subgraph(c).copy() for c in nx.connected_components(G_model)]
+    print("点数量,"+explain+":", len(G_model.nodes()))
+    print("边数量,"+explain+":", len(G_model.edges()))
+    print("============================================================",explain)
+    print("连通数量,"+explain+":", len(S))
+    print("最大连通分量内城市数目,"+explain+":",len(S[0]))
+    # list_degree = list(G_model.degree())
+    # print("度分布,"+explain+":", list_degree)
+    print("平均点连通性,"+explain+":",+ str(nx.average_node_connectivity(G_model)))
+
+
+
 
 list_degree = list(G.degree())
 list_degree.sort(key=lambda x:x[1],reverse=True)
-print("度分布：",list_degree )
+
 def find_edges_by_cityName(G_one,edgeNum,cityName):
     """
     根据城市名称查找有该城市的边
@@ -81,9 +96,30 @@ def find_edges_by_cityName(G_one,edgeNum,cityName):
             break
     return list_edges
 
-# G_one.remove_edge()
+def add_degree_small_city(G_one,list_degree,reduce_edgeNum,begin_degree):
+    """
+    增加度小的城市的连边
+    :param G_one:
+    :param list_degree:
+    :param reduce_edgeNum: 删除边的数量
+    :param begin_degree:
+    :return:
+    """
+    list_deal= []
+    for idx, i in enumerate(list_degree):
+        #找到开始删除的度的索引
+        if i[1] == begin_degree:
+            #确定要增加的城市
+            list_deal = list_degree[idx:idx + reduce_edgeNum]
+            break
+    for j in range(len(list_deal)-1):
+        G_one.add_edges_from([(list_deal[j][0],list_deal[j+1][0])])
+    return G_one
+    # for i in list_degree:
 
 def remove_edges_by_degree_distribution(G_one,list_degree):
+    # print("之前的平均点连通性：" + str(nx.average_node_connectivity(G_one)))
+    edges_origion = len(G_one.edges())
     n=0
     #减小度大的连边
     for i in list_degree:
@@ -92,14 +128,12 @@ def remove_edges_by_degree_distribution(G_one,list_degree):
             G_one.remove_edges_from(edge_list)
             n+=1
             break
+    edges_reduce_large_degree = len(G_one.edges())
     #增加度小的连边
-    # for j in reversed(list_degree):
+    G_new = add_degree_small_city(G_one,list_degree,edges_origion-edges_reduce_large_degree,7)
+    print("完成后的平均点连通性：" + str(nx.average_node_connectivity(G_new)))
 
-
-
-# print(find_edges_by_cityName(G,1,"汉中"))
-
-
+remove_edges_by_degree_distribution(G,list_degree)
 
 
 

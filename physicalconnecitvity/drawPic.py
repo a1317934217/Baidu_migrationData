@@ -84,7 +84,7 @@ X = ["0.01","0.02","0.03","0.04","0.05","0.06","0.07","0.08","0.09","0.1","0.11"
 
 
 # 画图 设置X轴显示效果
-fig = plt.figure()
+fig = plt.figure(figsize=(5.5,4))
 ax = fig.add_subplot(111)
 
 
@@ -105,22 +105,22 @@ ax.xaxis.set_major_locator(MaxNLocator(integer=True))
 # 设置Mac上的字体
 # font = FontProperties(fname='/Library/Fonts/Arial Unicode.ttf')
 # win（大壳子上跑数据的字体）
-font = FontProperties(fname='D:\千图摄图下载\字体包\平面设计常用字体\微软雅黑体.ttf')
-# 坐标轴ticks的字体大小
+font = matplotlib.font_manager.FontProperties(
+    fname='C:\\Windows\\Fonts\\SimHei.ttf')# 坐标轴ticks的字体大小
 # 设置x轴刻度
 plt.xticks([0, 0.2, 0.4, 0.6, 0.8, 1])
 # 设置y轴刻度
 plt.yticks([0, 0.2, 0.4, 0.6, 0.8, 1])
-plt.tick_params(labelsize=5)
+plt.tick_params(labelsize=10)
 
-plt.xlabel("阈值", FontProperties=font)
-plt.ylabel("最大连通性组件值", FontProperties=font)
-plt.title("20200101根据最大连通性折线图", FontProperties=font)
+plt.xlabel("阈值", fontproperties=font,fontsize=10)
+plt.ylabel("最大连通性组件值", fontproperties=font,fontsize=10)
+plt.title("20200101根据最大连通性折线图", fontproperties=font,fontsize=10)
 
 # 画点13 # 画虚线7 06
 plt.scatter(0.02, 1, s=50, color='cyan')
 plt.plot([0.02, 0.02], [295, 0], 'x--', lw=2)
-plt.text(0.03, 1, r'阈值', fontdict={'size': '15', 'color': 'black', "FontProperties": font})
+plt.text(0.03, 1, r'阈值', fontdict={'size': '15', 'color': 'black', "fontproperties": font})
 
 
 

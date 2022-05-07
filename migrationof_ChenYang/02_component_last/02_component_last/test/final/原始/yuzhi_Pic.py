@@ -19,20 +19,20 @@ yuzhi_list= [0.0, 0.005, 0.01, 0.015, 0.02, 0.025, 0.03, 0.035, 0.04, 0.045, 0.0
 number_weakly_connected_component_list= [1, 2, 11, 19, 26, 36, 48, 65, 78, 92, 104, 111, 122, 133, 139, 152, 161, 170, 182, 187, 193, 198, 206, 217, 225, 230, 231, 236, 239, 245, 251, 255, 260, 264, 271, 273, 274, 277, 281, 283, 286, 286, 288, 289, 290, 293, 300, 303, 303, 307, 309]
 size_of_the_giant_connected_component_list= [350, 349, 321, 316, 314, 295, 286, 260, 229, 160, 137, 135, 83, 83, 83, 82, 43, 42, 40, 40, 38, 38, 35, 22, 21, 17, 17, 17, 16, 16, 12, 12, 11, 11, 11, 11, 11, 11, 11, 11, 10, 10, 10, 10, 10, 10, 9, 9, 9, 8, 8]
 
-plt.subplots(figsize=(8 ,6))
+plt.subplots(figsize=(5.5 ,4))
 num_tp = len(yuzhi_list)
 print(num_tp)
 plt.plot(yuzhi_list,number_weakly_connected_component_list , "m.-", linewidth=2,  color='blue', label='弱连接组件数量')
 plt.plot(yuzhi_list,size_of_the_giant_connected_component_list , "g*-", linewidth=2,  color='red', label='最大连通组件内城市数量')
 #用需要的数据将x轴替换为需要的数据
 # plt.grid()  # 生成网格
-plt.legend(fontsize=18, loc=2)
-plt.xticks(np.arange(0,0.2525,0.01),np.arange(0,0.2525,0.01),fontsize=18, rotation=60)
+plt.legend(fontsize=10, loc=2)
+plt.xticks(np.arange(0,0.2525,0.01),np.arange(0,0.2525,0.01),fontsize=10, rotation=60)
 """设置x坐标轴的精度  保留小数点的位数"""
 plt.gca().xaxis.set_major_formatter(ticker.FormatStrFormatter('%.2f'))
-plt.yticks(fontsize=18)
-plt.xlabel('阈值', fontsize=18)
-plt.ylabel('节点个数(城市数量)', fontsize=18)
+plt.yticks(fontsize=10)
+plt.xlabel('阈值', fontsize=10)
+plt.ylabel('节点个数(城市数量)', fontsize=10)
 plt.ylim(0)
 plt.xlim(0,0.25)#三个月
 plt.tight_layout()

@@ -67,7 +67,7 @@ def get_city_migration_index(file_save_location,task_type):
                 # url = "https://huiyan.baidu.com/migration/historycurve.jsonp?dt=city&id=110000&type=move_in"
                 url = 'https://huiyan.baidu.com/migration/historycurve.jsonp?dt=city&id={}&type={}'.format(code, task_type)
                 try:
-                    # https://huiyan.baidu.com/migration/historycurve.jsonp?dt=city&id=110000&type=move_in4
+                    # https://huiyan.baidu.com/migration/historycurve.jsonp?dt=city&id=110000&type=move_in
                     text = loads_jsonp(requests.get(url).text)
                 except:
                     print(name+"：no data")
